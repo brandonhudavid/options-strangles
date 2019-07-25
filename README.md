@@ -1,6 +1,6 @@
-# Options Scrape
+# Strangler
 
-Gets data regarding stocks and their past quarters' earnings reports.
+Gets data regarding stocks and their past quarters' earnings reports, allowing users to better perform stock options strangles.
 
 ## Setup
 
