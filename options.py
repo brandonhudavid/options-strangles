@@ -6,7 +6,9 @@ import json
 import datetime
 
 def getEarningsHistoryHTML(stock):
-    fp = urllib.request.urlopen("https://www.nasdaq.com/earnings/report/{}".format(stock))
+    s = "https://www.nasdaq.com/market-activity/stocks/{}/earnings".format(stock)
+    print(s)
+    fp = urllib.request.urlopen(s)
     byteArr = fp.read()
     html = byteArr.decode("utf8")
     fp.close()
