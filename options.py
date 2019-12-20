@@ -1,17 +1,16 @@
 from bs4 import BeautifulSoup
-import urllib.request
 from config import API_KEY
 from alpha_vantage.timeseries import TimeSeries
 import json
 import datetime
+import requests
 
 def getEarningsHistoryHTML(stock):
+    headers = {'User-Agent': 'Mozilla/5.0'}
     s = "https://www.nasdaq.com/market-activity/stocks/{}/earnings".format(stock)
-    print(s)
-    fp = urllib.request.urlopen(s)
-    byteArr = fp.read()
+    fp = requests.get(s, headers=headers)
+    byteArr = fp.content
     html = byteArr.decode("utf8")
-    fp.close()
     return html
 
 def getDate(quarterReport):
@@ -21,6 +20,7 @@ def getPastEarningsDates(stock):
     pastEarningsDates = []
     soup = BeautifulSoup(getEarningsHistoryHTML(stock), 'html.parser')
     table = soup.table.find_all('tr')
+    print(table)
     for i in range(1, len(table)):
         quarterReport = table[i]
         date = getDate(quarterReport)
